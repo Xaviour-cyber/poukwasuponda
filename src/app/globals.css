@@ -1,0 +1,386 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ═══════════════════════════════════════════
+     Mobbin-style achromatic palette (PRD §4.5)
+     ═══════════════════════════════════════════ */
+  --color-ink: #141414;
+  --color-canvas: #FFFFFF;
+  --color-graphite: #707070;
+  --color-ash: #ADADAD;
+  --color-silver: #C2C2C2;
+  --color-fog: #EDEDED;
+  --color-mist: #F2F2F2;
+
+  /* Semantic aliases */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-inverse: #141414;
+  --color-text-primary: #141414;
+  --color-text-secondary: #707070;
+  --color-text-tertiary: #ADADAD;
+  --color-text-inverse: #FFFFFF;
+  --color-border-primary: #EDEDED;
+  --color-border-secondary: #E0E0E0;
+
+  /* Typography — Inter (closest to saans) */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --max-w-page: 1280px;
+  --navbar-h: 60px;
+}
+
+/* ═══════════════════════════════════════
+   Base styles
+   ═══════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.21px;
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+/* ═══════════════════════════════════════
+   Mobbin Typography Scale (PRD §4.5)
+   ═══════════════════════════════════════ */
+.text-display {
+  font-size: 80px;
+  line-height: 80px;
+  letter-spacing: -0.88px;
+  font-weight: 650;
+}
+.text-heading-lg {
+  font-size: 56px;
+  line-height: 63px;
+  letter-spacing: -0.39px;
+  font-weight: 650;
+}
+.text-heading {
+  font-size: 32px;
+  line-height: 42px;
+  letter-spacing: 0;
+  font-weight: 650;
+}
+.text-subheading {
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.28px;
+  font-weight: 450;
+}
+.text-subheading-bold {
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.28px;
+  font-weight: 600;
+}
+.text-body {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.21px;
+  font-weight: 400;
+}
+.text-body-bold {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.21px;
+  font-weight: 600;
+}
+.text-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.text-body-sm-bold {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 450;
+}
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════
+   Navbar scroll effect (PRD §4.7)
+   ═══════════════════════════════════════ */
+.navbar {
+  transition: background-color 200ms ease-out, border-color 200ms ease-out;
+}
+.navbar[data-scrolled="true"] {
+  background-color: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-fog);
+}
+.navbar[data-scrolled="false"] {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+/* ═══════════════════════════════════════
+   Component: Buttons (PRD §4.6)
+   ═══════════════════════════════════════ */
+.btn-filled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 150ms ease-out;
+  white-space: nowrap;
+}
+.btn-filled:hover {
+  background: #2a2a2a;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  border: 1px solid var(--color-ink);
+  transition: background-color 150ms ease-out, box-shadow 150ms ease-out;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  box-shadow: inset 0 0 0 1px rgba(64,64,64,0.16);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  border: 1px solid var(--color-fog);
+  transition: background-color 150ms ease-out;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  background: var(--color-mist);
+}
+
+/* Pill filter (PRD §4.6) */
+.pill-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 20px;
+  cursor: pointer;
+  border: 1px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  transition: all 150ms ease-out;
+  white-space: nowrap;
+}
+.pill-filter[data-active="true"],
+.pill-filter.active {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  border-color: var(--color-ink);
+}
+
+/* ═══════════════════════════════════════
+   Component: Card (PRD §4.6)
+   ═══════════════════════════════════════ */
+.card {
+  background: var(--color-canvas);
+  border: 1px solid var(--color-fog);
+  border-radius: 16px;
+  padding: 16px;
+  transition: border-color 150ms ease-out;
+}
+.card:hover {
+  border-color: var(--color-border-secondary);
+}
+.card-lg {
+  padding: 24px;
+  border-radius: 24px;
+}
+
+/* ═══════════════════════════════════════
+   Marquee / scrolling columns
+   ═══════════════════════════════════════ */
+.marquee-track { animation: marquee 50s linear infinite; }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.scroll-col-up { animation: scrollUp 40s linear infinite; }
+.scroll-col-down { animation: scrollDown 40s linear infinite; }
+@keyframes scrollUp { to { transform: translateY(-50%); } }
+@keyframes scrollDown { to { transform: translateY(50%); } }
+
+/* Fade-in on scroll */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   Hamburger menu (mobile)
+   ═══════════════════════════════════════ */
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 9999px;
+  transition: transform 200ms ease-out, opacity 200ms ease-out;
+}
+.hamburger-open .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-open .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu slide */
+.mobile-menu-enter {
+  animation: slideDown 200ms ease-out forwards;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   Page grid (matches Mobbin's 16-col)
+   ═══════════════════════════════════════ */
+.page-grid {
+  max-width: var(--max-w-page);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section spacing: 80px between sections */
+.section-gap {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+/* ═══════════════════════════════════════
+   Badge (PRD §4.6)
+   ═══════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+/* ═══════════════════════════════════════
+   Search input (PRD §4.6)
+   ═══════════════════════════════════════ */
+.search-input {
+  width: 100%;
+  height: 44px;
+  padding: 8px 16px 8px 44px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--color-mist);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-ink);
+  outline: none;
+}
+.search-input::placeholder {
+  color: var(--color-graphite);
+}
+
+/* ═══════════════════════════════════════
+   Responsive typography
+   ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .text-display {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -0.6px;
+  }
+  .text-heading-lg {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: -0.2px;
+  }
+  .text-heading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   Reduced motion
+   ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track, .scroll-col-up, .scroll-col-down { animation: none; }
+  .hamburger-line { transition: none; }
+  .mobile-menu-enter { animation: none; }
+  .fade-up { opacity: 1; transform: none; transition: none; }
+}
