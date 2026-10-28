@@ -10,22 +10,16 @@ export default function HeroSection() {
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24">
       <div className="mx-auto max-w-[1280px] px-5 md:px-8 text-center">
-        {/* Top Minimal Pill Tag */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#EDEDED] bg-[#F2F2F2] px-3.5 py-1 text-[13px] font-[500] text-[#141414] mb-8">
-          <span className="flex h-2 w-2 rounded-full bg-[#141414] animate-pulse" />
-          <span>Gereja Oikumene Wasuponda, Luwu Timur</span>
-        </div>
-
         {/* Display Headline with Inline Church Icons (Mobbin Signature Pattern) */}
         <h1 className="mx-auto max-w-4xl text-[38px] sm:text-[54px] md:text-[68px] lg:text-[76px] font-[650] leading-[1.08] tracking-[-0.03em] text-[#141414]">
           Tempat{" "}
-          <span className="inline-flex items-center align-middle mx-1.5 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full border border-[#EDEDED] bg-[#F2F2F2] p-1 sm:p-1.5 shadow-sm overflow-hidden">
+          <span className="inline-flex items-center align-middle mx-1.5 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full border border-[#EDEDED] bg-[#F2F2F2] p-1.5 sm:p-2 shadow-sm overflow-hidden">
             <Image
-              src="/logo-pouk.png"
+              src="/icon.png"
               alt="Logo POUK"
               width={48}
               height={48}
-              className="h-full w-full object-contain mix-blend-multiply"
+              className="h-full w-full object-contain"
             />
           </span>{" "}
           keluarga bertumbuh{" "}
@@ -63,13 +57,13 @@ export default function HeroSection() {
         <div className="relative mx-auto mt-12 md:mt-16 max-w-4xl rounded-[20px] md:rounded-[24px] border border-[#EDEDED] bg-white p-4 md:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.04)] text-left">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#EDEDED]">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F2F2] overflow-hidden">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F2F2F2] p-1.5 overflow-hidden">
                 <Image
-                  src="/logo-pouk.png"
+                  src="/icon.png"
                   alt="Logo POUK"
                   width={40}
                   height={40}
-                  className="h-9 w-9 object-contain mix-blend-multiply"
+                  className="h-full w-full object-contain"
                 />
               </div>
               <div>

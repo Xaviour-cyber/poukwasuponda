@@ -14,6 +14,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: { default: "POUK Wasuponda", template: "%s · POUK Wasuponda" },
   description: "Jadwal ibadah, warta jemaat, renungan, dan kegiatan POUK Wasuponda.",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "POUK Wasuponda",
     description: "Ada tempat untuk Anda di POUK Wasuponda.",

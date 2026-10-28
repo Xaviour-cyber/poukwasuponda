@@ -13,6 +13,13 @@ export const church = {
 
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(church.mapsQuery)}`;
 
+export const socialLinks = {
+  youtube: "https://www.youtube.com/@GerejaPOUKJemaatWasuponda",
+  facebook: "https://www.facebook.com/search/top?q=Gereja%20POUK%20Wasuponda",
+  instagram: "https://www.instagram.com/explore/tags/poukwasuponda/",
+  wa: `https://wa.me/${church.wa}`,
+};
+
 export const nav = [
   { href: "/", label: "Beranda" },
   { href: "/ibadah", label: "Ibadah" },

@@ -83,13 +83,13 @@ export default function StoriesSection() {
               {featuredQuote.quote}
             </blockquote>
             <div className="mt-6 flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-[#F2F2F2] flex items-center justify-center overflow-hidden">
+              <div className="h-10 w-10 rounded-full bg-[#F2F2F2] flex items-center justify-center p-1 overflow-hidden">
                 <Image
-                  src="/logo-pouk.png"
+                  src="/icon.png"
                   alt="Logo POUK"
                   width={36}
                   height={36}
-                  className="h-8 w-8 object-contain mix-blend-multiply"
+                  className="h-full w-full object-contain"
                 />
               </div>
               <div>
