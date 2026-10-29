@@ -1,32 +1,30 @@
-// Data resmi dan referensi POUK Wasuponda sesuai PRD v0.2
+// Data resmi dan referensi POUK Wasuponda
 export const church = {
   name: "POUK Wasuponda",
   fullName: "Gereja Persekutuan Oikumene Umat Kristen Wasuponda",
-  tagline: "Rumah digital jemaat: tempat keluarga bertumbuh dalam iman",
-  address: "Wasuponda, Luwu Timur, Sulawesi Selatan",
+  tagline: "Rumah bersekutu, berakar, dan bertumbuh bersama dalam terang kasih Kristus",
+  address: "Wasuponda, Kabupaten Luwu Timur, Sulawesi Selatan",
   wa: "6281234567890",
   email: "sekretariat@pouk-wasuponda.org",
   mapsQuery: "POUK Wasuponda Luwu Timur",
   historyShort:
-    "Berdiri sejak puluhan tahun melayani jemaat oikumene di Wasuponda dan sekitarnya, POUK Wasuponda adalah tempat bersekutu yang terbuka bagi semua orang untuk berakar, bertumbuh, dan berbuah dalam Kristus.",
+    "Gereja Persekutuan Oikumene Umat Kristen (POUK) Wasuponda hadir sebagai rumah rohani yang menyatukan beragam latar belakang jemaat dalam satu persekutuan kasih di Wasuponda, Luwu Timur.",
 };
 
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(church.mapsQuery)}`;
 
 export const socialLinks = {
   youtube: "https://www.youtube.com/@GerejaPOUKJemaatWasuponda",
-  facebook: "https://www.facebook.com/search/top?q=Gereja%20POUK%20Wasuponda",
-  instagram: "https://www.instagram.com/explore/tags/poukwasuponda/",
-  wa: `https://wa.me/${church.wa}`,
+  wa: `https://wa.me/${church.wa}?text=${encodeURIComponent("Shalom Sekretariat POUK Wasuponda, saya ingin bertanya seputar...")}`,
 };
 
+// 5 menu utama bersih (Kontak ditempatkan khusus di tombol aksi kanan)
 export const nav = [
   { href: "/", label: "Beranda" },
   { href: "/ibadah", label: "Ibadah" },
   { href: "/warta", label: "Warta Jemaat" },
   { href: "/renungan", label: "Renungan" },
   { href: "/kegiatan", label: "Kegiatan" },
-  { href: "/kontak", label: "Kontak" },
 ];
 
 export const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
@@ -45,32 +43,32 @@ export type Service = {
 export const services: Service[] = [
   {
     id: "raya",
-    name: "Ibadah Raya",
+    name: "Ibadah Raya Hari Minggu",
     day: 0,
     time: "09:00",
     place: "Gedung Utama POUK Wasuponda",
-    note: "Ibadah umum untuk seluruh keluarga dengan liturgi oikumene.",
-    badge: "Utama",
-    target: "Semua Jemaat",
+    note: "Ibadah bersama seluruh keluarga jemaat dengan tata liturgi oikumene.",
+    badge: "Ibadah Utama",
+    target: "Semua Jemaat & Tamu",
   },
   {
     id: "sekolah-minggu",
-    name: "Sekolah Minggu (Anak)",
+    name: "Sekolah Minggu Anak",
     day: 0,
     time: "09:00",
     place: "Gedung Serbaguna Lt. 1",
-    note: "Pendidikan rohani anak usia balita hingga tunas remaja.",
-    badge: "Anak",
+    note: "Pembinaan iman anak usia balita hingga remaja awal dengan guru sekolah minggu.",
+    badge: "Anak & Balita",
     target: "Anak-Anak & Balita",
   },
   {
     id: "doa-rabu",
-    name: "Persekutuan Doa",
+    name: "Persekutuan Doa Syafaat",
     day: 3,
     time: "19:00",
-    place: "Gedung Utama",
-    note: "Doa syafaat tengah pekan bersama majelis dan jemaat.",
-    badge: "Doa",
+    place: "Gedung Utama POUK",
+    note: "Persekutuan doa tengah pekan bersama majelis jemaat dan keluarga jemaat.",
+    badge: "Tengah Pekan",
     target: "Umum",
   },
   {
@@ -78,22 +76,42 @@ export const services: Service[] = [
     name: "Ibadah Pemuda & Remaja",
     day: 6,
     time: "18:30",
-    place: "Gedung Pemuda",
-    note: "Pujian kontemporer, persekutuan pemuda, dan kelompok diskusi.",
+    place: "Gedung Pemuda POUK",
+    note: "Persekutuan generasi muda dengan pujian kontemporer dan sharing firman.",
     badge: "Pemuda",
     target: "Remaja & Pemuda",
   },
 ];
 
+// Perhitungan jadwal terdekat dengan zona waktu resmi WITA (Asia/Makassar, UTC+8)
 export function nextService(now = new Date()): Service {
-  const t = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Makassar" }));
-  const mins = t.getHours() * 60 + t.getMinutes();
+  // Format waktu saat ini ke zona Asia/Makassar
+  const makassarStr = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Makassar",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: false,
+  }).format(now);
+
+  const t = new Date(makassarStr);
+  const currentDay = t.getDay();
+  const currentMins = t.getHours() * 60 + t.getMinutes();
+
   const wait = (s: Service) => {
     const [h, m] = s.time.split(":").map(Number);
-    let d = (s.day - t.getDay() + 7) % 7;
-    if (d === 0 && h * 60 + m <= mins) d = 7;
-    return d * 1440 + h * 60 + m;
+    let diffDays = (s.day - currentDay + 7) % 7;
+    const targetMins = h * 60 + m;
+
+    if (diffDays === 0 && targetMins <= currentMins) {
+      diffDays = 7;
+    }
+    return diffDays * 1440 + (targetMins - currentMins);
   };
+
   return [...services].sort((a, b) => wait(a) - wait(b))[0] || services[0];
 }
 
@@ -171,14 +189,14 @@ export const devotionals: Devotional[] = [
   },
   {
     id: "dev-2",
-    title: "Kasih yang bekerja dalam tindakan",
+    title: "Kasih yang bekerja dalam tindakan nyata",
     verse: "1 Korintus 13:4-7",
     category: "Kehidupan Sehari-hari",
     author: "Majelis Jemaat",
     date: "23 Oktober 2026",
     readTime: "4 mnt baca",
     excerpt:
-      "Kasih bukan sekadar getaran perasaan. Ia mewujud dalam sapaan ramah, kesabaran mendengarkan sesama, dan pengampunan nyata.",
+      "Kasih bukan sekadar getaran perasaan. Ia mewujud dalam sapaan ramah, kesabaran mendengarkan sesama, dan kemurahan hati.",
   },
   {
     id: "dev-3",
@@ -247,112 +265,88 @@ export const events: Event[] = [
   },
 ];
 
-export const ministries = [
+export type Ministry = {
+  id: string;
+  name: string;
+  role: string;
+  desc: string;
+  schedule: string;
+  iconType: "child" | "youth" | "women" | "men" | "diakonia" | "music";
+};
+
+export const ministries: Ministry[] = [
   {
     id: "anak",
-    name: "Komisi Anak",
-    role: "Sekolah Minggu",
-    desc: "Membimbing generasi cilik mencintai Tuhan dengan metode ceria dan ramah anak.",
-    icon: "🕊️",
+    name: "Komisi Anak (Sekolah Minggu)",
+    role: "Pendidikan Iman Anak",
+    desc: "Membimbing tunas-tunas muda mengenal firman Tuhan melalui kelas ceria, cerita Alkitab, dan lagu pujian.",
+    schedule: "Minggu, 09:00 WITA",
+    iconType: "child",
   },
   {
     id: "pemuda",
     name: "Komisi Pemuda & Remaja",
     role: "Generasi Penerus",
-    desc: "Wadah bertumbuh, berkreasi, dan saling menguatkan di tengah tantangan zaman.",
-    icon: "🔥",
+    desc: "Wadah bertumbuh, berkreasi, dan saling menguatkan dalam persekutuan pemuda kristiani yang aktif dan berakar.",
+    schedule: "Sabtu, 18:30 WITA",
+    iconType: "youth",
   },
   {
     id: "wanita",
     name: "Persekutuan Wanita (PW)",
     role: "Pilar Doa & Keluarga",
-    desc: "Persekutuan ibu-ibu jemaat dalam doa, perkunjungan kasih, dan pemberdayaan keluarga.",
-    icon: "🌸",
+    desc: "Persekutuan kaum ibu dalam doa syafaat, perkunjungan kasih jemaat, dan pembinaan ketahanan keluarga.",
+    schedule: "Jumat, 16:30 WITA",
+    iconType: "women",
   },
   {
     id: "pria",
     name: "Persekutuan Kaum Bapak (PKB)",
-    role: "Kepemimpinan Rohani",
-    desc: "Membangun persekutuan bapak sebagai teladan iman dan kepala keluarga kristiani.",
-    icon: "⚓",
+    role: "Keteladanan Rohani",
+    desc: "Membangun persekutuan bapak sebagai imam keluarga dan teladan iman yang setia melayani Tuhan.",
+    schedule: "Kamis, 19:00 WITA",
+    iconType: "men",
   },
   {
     id: "diakonia",
     name: "Komisi Diakonia",
-    role: "Pelayanan Sosial",
-    desc: "Menyalurkan kasih nyata kepada yang sakit, lansia, dan saudara yang membutuhkan.",
-    icon: "🤝",
+    role: "Pelayanan Kasih Nyata",
+    desc: "Menyalurkan kepedulian nyata bagi jemaat yang sakit, lansia, dan saudara-saudara kita yang membutuhkan pertolongan.",
+    schedule: "Pelayanan Terjadwal",
+    iconType: "diakonia",
   },
   {
     id: "musik",
     name: "Musik & Multimedia",
-    role: "Pujian & Liturgi",
-    desc: "Memperlengkapi peribadahan dengan pujian, sound, tata visual, dan rekaman digital.",
-    icon: "🎵",
+    role: "Liturgi & Pujian",
+    desc: "Memperlengkapi ibadah dengan pelayanan musik, tim pujian, sound system, dan dokumentasi siaran ibadah.",
+    schedule: "Latihan Jumat, 19:30 WITA",
+    iconType: "music",
   },
 ];
 
-export const testimonials = [
-  {
-    id: "t1",
-    author: "Kel. Bpk. Markus & Ibu Sarah",
-    role: "Jemaat Baru (Pindah 2025)",
-    avatarInitials: "MS",
-    text: "Pertama kali kami sekeluarga pindah tugas ke Wasuponda, kami merasa sangat disambut di pintu gereja. Keramahan jemaat membuat kami langsung merasa di rumah.",
-    tag: "Penyambutan",
-  },
-  {
-    id: "t2",
-    author: "Daniel R.",
-    role: "Anggota Komisi Pemuda",
-    avatarInitials: "DR",
-    text: "Persekutuan pemuda di sini bukan cuma kumpul biasa, tapi tempat kita bisa terbuka cerita pergumulan hidup dan saling mendoakan tanpa dihakimi.",
-    tag: "Komisi Pemuda",
-  },
-  {
-    id: "t3",
-    author: "Ibu Martha K.",
-    role: "Jemaat Perantau di Makassar",
-    avatarInitials: "MK",
-    text: "Meskipun sedang bekerja di luar kota, website ini membuat saya tetap bisa membaca warta dan renungan setiap Minggu pagi tepat waktu.",
-    tag: "Jemaat Perantau",
-  },
-];
-
-export const featuredQuote = {
+export const pastoralWelcome = {
   quote:
-    "Gereja bukan sekadar bangunan beton di Wasuponda, melainkan setiap pribadi yang saling mengasihi, mengampuni, dan berjalan bersama dalam terang Kristus.",
-  author: "Pdt. Pelayan Jemaat POUK Wasuponda",
-  title: "Gembala & Penasihat Majelis Jemaat",
+    "Gereja bukan sekadar bangunan berarsitektur megah, melainkan persekutuan orang-orang percaya yang saling mengasihi, menguatkan, dan menjadi terang di tengah masyarakat Wasuponda. Pintu kami senantiasa terbuka untuk menyambut kehadiran Anda sekeluarga.",
+  author: "Majelis & Gembala Jemaat",
+  role: "POUK Wasuponda, Luwu Timur",
 };
-
-export const verses = [
-  "Bersukacita pergi ke rumah Tuhan (Mazmur 122:1)",
-  "Kasih tidak berkesudahan (1 Korintus 13:8)",
-  "Tuhan adalah gembalaku, takkan kekurangan aku (Mazmur 23:1)",
-  "Datanglah kepada-Ku, kamu semua yang letih lesu (Matius 11:28)",
-  "Segala perkara dapat kutanggung di dalam Dia (Filipi 4:13)",
-];
 
 export const faq = [
   {
     q: "Apa yang sebaiknya saya kenakan saat beribadah?",
-    a: "Pakaian rapi, sopan, dan nyaman. Anda tidak perlu pakaian formal khusus untuk bisa beribadah bersama kami.",
+    a: "Pakaian yang rapi, sopan, dan nyaman. Kami menyambut Anda dengan kehangatan apa adanya.",
   },
   {
     q: "Berapa lama ibadah hari Minggu berlangsung?",
-    a: "Ibadah Raya biasanya berlangsung sekitar 75 hingga 90 menit, meliputi pujian, doa, firman, dan persembahan.",
+    a: "Ibadah Raya biasanya berlangsung sekitar 75 hingga 90 menit.",
   },
   {
     q: "Apakah ada kelas untuk anak-anak selama ibadah?",
-    a: "Ya! Sekolah Minggu diadakan bersamaan dengan Ibadah Raya jam 09:00 WITA dengan guru-guru yang penuh perhatian.",
+    a: "Ya! Sekolah Minggu diadakan bersamaan dengan Ibadah Raya jam 09:00 WITA di ruang serbaguna.",
   },
   {
-    q: "Apakah saya harus jemaat terdaftar untuk berkunjung?",
-    a: "Sama sekali tidak! Semua orang, tamu luar kota, maupun pengunjung baru sangat disambut dengan tangan terbuka.",
-  },
-  {
-    q: "Bagaimana cara memberi persembahan jika beribadah daring?",
-    a: "Informasi rekening resmi gereja dan kode QRIS tersedia di sekretariat gereja atau melalui pengurus bendahara.",
+    q: "Apakah saya harus jemaat terdaftar untuk hadir beribadah?",
+    a: "Sama sekali tidak! Semua orang, tamu luar kota, maupun pengunjung baru sangat disambut dengan sukacita.",
   },
 ];
