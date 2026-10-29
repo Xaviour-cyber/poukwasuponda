@@ -42,44 +42,44 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    id: "raya",
-    name: "Ibadah Raya Hari Minggu",
-    day: 0,
-    time: "09:00",
-    place: "Gedung Utama POUK Wasuponda",
-    note: "Ibadah bersama seluruh keluarga jemaat dengan tata liturgi oikumene.",
-    badge: "Ibadah Utama",
-    target: "Semua Jemaat & Tamu",
-  },
-  {
     id: "sekolah-minggu",
-    name: "Sekolah Minggu Anak",
+    name: "Ibadah Sekolah Minggu",
     day: 0,
-    time: "09:00",
-    place: "Gedung Serbaguna Lt. 1",
-    note: "Pembinaan iman anak usia balita hingga remaja awal dengan guru sekolah minggu.",
-    badge: "Anak & Balita",
+    time: "08:00",
+    place: "Gedung Serbaguna POUK",
+    note: "Pendidikan rohani dan pembinaan iman bagi anak-anak dan balita.",
+    badge: "Sekolah Minggu",
     target: "Anak-Anak & Balita",
   },
   {
-    id: "doa-rabu",
-    name: "Persekutuan Doa Syafaat",
-    day: 3,
-    time: "19:00",
-    place: "Gedung Utama POUK",
-    note: "Persekutuan doa tengah pekan bersama majelis jemaat dan keluarga jemaat.",
-    badge: "Tengah Pekan",
-    target: "Umum",
+    id: "ibadah-minggu",
+    name: "Ibadah Hari Minggu",
+    day: 0,
+    time: "10:00",
+    place: "GEREJA POUK Wasuponda",
+    note: "Ibadah raya bersama seluruh keluarga jemaat POUK Wasuponda.",
+    badge: "Ibadah Raya",
+    target: "Semua Jemaat & Tamu",
   },
   {
     id: "pemuda",
-    name: "Ibadah Pemuda & Remaja",
-    day: 6,
+    name: "Ibadah Persekutuan Pemuda",
+    day: 4, // Kamis
     time: "18:30",
     place: "Gedung Pemuda POUK",
     note: "Persekutuan generasi muda dengan pujian kontemporer dan sharing firman.",
     badge: "Pemuda",
-    target: "Remaja & Pemuda",
+    target: "Pemuda",
+  },
+  {
+    id: "remaja",
+    name: "Ibadah Persekutuan Remaja",
+    day: 6, // Sabtu
+    time: "16:00",
+    place: "GEREJA POUK Wasuponda",
+    note: "Persekutuan remaja untuk saling menguatkan dalam iman dan karakter kristiani.",
+    badge: "Remaja",
+    target: "Remaja",
   },
 ];
 
@@ -215,11 +215,13 @@ export type Event = {
   id: string;
   day: string;
   month: string;
+  year?: string;
   title: string;
+  summary: string;
   time: string;
   place: string;
   tag: string;
-  status: "Buka Pendaftaran" | "Segera Hadir" | "Terbuka untuk Umum";
+  status: "Buka Pendaftaran" | "Segera Hadir" | "Terbuka untuk Umum" | "Kegiatan Rutin";
 };
 
 export const events: Event[] = [
@@ -227,7 +229,9 @@ export const events: Event[] = [
     id: "evt-1",
     day: "07",
     month: "Nov",
+    year: "2026",
     title: "Retret Pemuda & Remaja Wasuponda",
+    summary: "Kegiatan retret pembinaan iman dan keakraban bagi pemuda dan remaja se-Wasuponda di alam terbuka.",
     time: "08:00 - 17:00 WITA",
     place: "Camp Bukit Kasih Wasuponda",
     tag: "Komisi Pemuda",
@@ -237,7 +241,9 @@ export const events: Event[] = [
     id: "evt-2",
     day: "15",
     month: "Nov",
+    year: "2026",
     title: "Bakti Sosial & Pemeriksaan Kesehatan Gratis",
+    summary: "Pelayanan kesehatan gratis dan pembagian paket kasih bagi warga jemaat lansia dan masyarakat sekitar.",
     time: "09:30 WITA",
     place: "Pelataran Gedung POUK",
     tag: "Komisi Diakonia",
@@ -247,9 +253,11 @@ export const events: Event[] = [
     id: "evt-3",
     day: "29",
     month: "Nov",
+    year: "2026",
     title: "Ibadah Pembukaan Masa Adven 2026",
-    time: "09:00 WITA",
-    place: "Gedung Utama POUK",
+    summary: "Ibadah khusus penyalaan lilin Adven pertama dan persiapan jemaat menyongsong peringatan Natal.",
+    time: "10:00 WITA",
+    place: "GEREJA POUK Wasuponda",
     tag: "Ibadah Khusus",
     status: "Segera Hadir",
   },
@@ -257,11 +265,37 @@ export const events: Event[] = [
     id: "evt-4",
     day: "25",
     month: "Des",
+    year: "2026",
     title: "Ibadah Raya Natal Bersama Jemaat",
-    time: "09:00 WITA",
-    place: "Gedung Utama POUK",
+    summary: "Perayaan Natal kudus bersama seluruh jemaat keluarga besar POUK Wasuponda dalam sukacita keselamatan.",
+    time: "10:00 WITA",
+    place: "GEREJA POUK Wasuponda",
     tag: "Hari Raya",
     status: "Segera Hadir",
+  },
+  {
+    id: "evt-5",
+    day: "Jum",
+    month: "Pkn",
+    year: "2026",
+    title: "Latihan Paduan Suara & Musik Liturgi",
+    summary: "Persiapan puji-pujian ibadah raya bersama tim pemusik, paduan suara, dan multimedia gereja.",
+    time: "19:30 WITA",
+    place: "Gedung Utama POUK",
+    tag: "Musik & Liturgi",
+    status: "Kegiatan Rutin",
+  },
+  {
+    id: "evt-6",
+    day: "Jum",
+    month: "Pkn",
+    year: "2026",
+    title: "Persekutuan Doa Kaum Ibu (PW)",
+    summary: "Persekutuan doa wanita jemaat, saling menopang dalam pergumulan keluarga dan perkunjungan kasih.",
+    time: "16:30 WITA",
+    place: "Ruang Serbaguna POUK",
+    tag: "Persekutuan Wanita",
+    status: "Kegiatan Rutin",
   },
 ];
 
