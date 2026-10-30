@@ -11,12 +11,14 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Monitor scroll: transparent when at top (scrollY <= 20), solid white when scrolled down
+  const isHome = pathname === "/";
+
+  // Monitor scroll: threshold of 20px
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    handleScroll(); // initialize on mount
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -38,137 +40,133 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // Is the navbar currently over dark hero at top?
-  const isTransparent = !scrolled && !open;
+  // Background and appearance state:
+  // Solid white when scrolled, on inner pages, or when mobile drawer is open.
+  // 100% transparent (no lines, no gradients) when at top of homepage.
+  const isSolid = !isHome || scrolled || open;
 
   return (
-    <header className="fixed sm:sticky top-0 inset-x-0 z-50">
-      {/* Top Bar Container
-          - Transparent at top
-          - Smoothly transitions to solid white on scroll
-          - Solid white when mobile menu is open
+    <header className="fixed top-0 inset-x-0 z-50 h-[64px]">
+      {/* 
+        Smooth Background Overlay:
+        Fades in seamlessly using GPU-accelerated opacity transition.
+        Zero black gradient bars, zero lines, zero stutter ("jeda").
       */}
       <div
-        className={`transition-all duration-300 ease-in-out ${
-          open
-            ? "bg-white border-b border-[#EDEDED] text-[#141414]"
-            : scrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-[#EDEDED] shadow-[0_1px_6px_rgba(0,0,0,0.04)] text-[#141414]"
-            : "bg-gradient-to-b from-black/60 via-black/20 to-transparent border-b border-transparent text-white"
-        }`}
-      >
-        <div className="mx-auto flex h-[60px] max-w-[1280px] items-center justify-between px-4 sm:px-6 md:px-8">
-          {/* Left: Official Brand Logo with adaptive contrast */}
-          <Link
-            href="/"
-            className="group flex items-center transition-opacity hover:opacity-90"
-            aria-label="POUK Wasuponda Beranda"
-          >
-            <div
-              className={`transition-all duration-300 rounded-xl px-2 py-1 ${
-                isTransparent
-                  ? "bg-white/90 backdrop-blur-xs shadow-xs"
-                  : "bg-transparent"
-              }`}
-            >
-              <Image
-                src="/logo-navbar.png"
-                alt="Gereja POUK Jemaat Wasuponda"
-                width={175}
-                height={40}
-                className="h-[34px] sm:h-[38px] w-auto object-contain"
-                priority
-              />
-            </div>
-          </Link>
+        className={`pointer-events-none absolute inset-0 transition-opacity duration-300 ease-in-out ${
+          isSolid ? "opacity-100" : "opacity-0"
+        } bg-white/95 backdrop-blur-md border-b border-[#EDEDED] shadow-[0_2px_12px_rgba(0,0,0,0.04)]`}
+        aria-hidden="true"
+      />
 
-          {/* Center: Desktop Navigation Links */}
-          <nav
-            aria-label="Navigasi Utama"
-            className="hidden items-center gap-1 md:flex"
-          >
-            {nav.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`rounded-full px-3.5 py-1.5 text-[14px] font-[500] transition-colors ${
-                    isTransparent
-                      ? isActive
-                        ? "bg-white/25 text-white font-[600]"
-                        : "text-white/90 hover:bg-white/15 hover:text-white"
-                      : isActive
+      {/* Main Nav Bar */}
+      <div className="relative mx-auto flex h-[64px] max-w-[1280px] items-center justify-between px-4 sm:px-6 md:px-8">
+        {/* Left: Official Brand Logo with seamless tone transition */}
+        <Link
+          href="/"
+          className="group flex items-center transition-opacity hover:opacity-90"
+          aria-label="POUK Wasuponda Beranda"
+        >
+          <div className="relative flex items-center">
+            <Image
+              src="/logo-navbar.png"
+              alt="Gereja POUK Jemaat Wasuponda"
+              width={185}
+              height={42}
+              className={`h-[34px] sm:h-[38px] w-auto object-contain transition-[filter] duration-300 ease-in-out ${
+                isSolid ? "brightness-100" : "brightness-0 invert"
+              }`}
+              priority
+            />
+          </div>
+        </Link>
+
+        {/* Center: Desktop Navigation Links */}
+        <nav
+          aria-label="Navigasi Utama"
+          className="hidden items-center gap-1 md:flex"
+        >
+          {nav.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`rounded-full px-4 py-2 text-[14px] font-[500] transition-colors duration-200 ${
+                  isSolid
+                    ? isActive
                       ? "bg-[#F2F2F2] font-[600] text-[#141414]"
                       : "text-[#707070] hover:bg-[#F2F2F2]/80 hover:text-[#141414]"
-                  }`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+                    : isActive
+                    ? "bg-white/20 text-white font-[600]"
+                    : "text-white/85 hover:bg-white/10 hover:text-white"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-          {/* Right: Actions (Kontak + Rencanakan Kunjungan) */}
-          <div className="hidden items-center gap-3 md:flex">
-            <Link
-              href="/kontak"
-              className={`text-[14px] font-[500] px-2 transition-colors ${
-                isTransparent
-                  ? "text-white/90 hover:text-white"
-                  : "text-[#707070] hover:text-[#141414]"
-              }`}
-            >
-              Kontak
-            </Link>
-            <Link
-              href="/ibadah#kunjungan"
-              className={`inline-flex h-[36px] items-center justify-center rounded-full px-4 text-[13px] font-[600] shadow-sm transition-all active:scale-[0.98] ${
-                isTransparent
-                  ? "bg-white text-[#141414] hover:bg-[#F3F4F6]"
-                  : "bg-[#141414] text-white hover:bg-[#262626]"
-              }`}
-            >
-              Rencanakan Kunjungan
-            </Link>
-          </div>
-
-          {/* Mobile: Creative & Modern Hamburger Button (Mobile First) */}
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            aria-expanded={open}
-            aria-controls="menu-seluler"
-            aria-label={open ? "Tutup Menu Navigasi" : "Buka Menu Navigasi"}
-            className={`group relative flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 active:scale-95 md:hidden ${
-              isTransparent
-                ? "border-white/30 bg-black/25 text-white backdrop-blur-xs hover:bg-black/35"
-                : "border-[#EDEDED] bg-[#F2F2F2] text-[#141414] hover:bg-[#EDEDED]"
+        {/* Right: Actions (Desktop) */}
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/kontak"
+            className={`px-3 py-2 text-[14px] font-[500] transition-colors duration-200 ${
+              isSolid
+                ? "text-[#707070] hover:text-[#141414]"
+                : "text-white/85 hover:text-white"
             }`}
           >
-            <div className="flex h-3.5 w-4 flex-col justify-between">
-              {/* Top line */}
-              <span
-                className={`h-[1.75px] rounded-full transition-all duration-300 ease-out origin-center ${
-                  isTransparent ? "bg-white" : "bg-[#141414]"
-                } ${open ? "translate-y-[6px] rotate-45 w-full !bg-[#141414]" : "w-full"}`}
-              />
-              {/* Middle line - staggered */}
-              <span
-                className={`h-[1.75px] rounded-full transition-all duration-200 ${
-                  isTransparent ? "bg-white" : "bg-[#141414]"
-                } ${open ? "opacity-0 scale-x-0" : "w-[65%] self-end"}`}
-              />
-              {/* Bottom line */}
-              <span
-                className={`h-[1.75px] rounded-full transition-all duration-300 ease-out origin-center ${
-                  isTransparent ? "bg-white" : "bg-[#141414]"
-                } ${open ? "-translate-y-[6px] -rotate-45 w-full !bg-[#141414]" : "w-full"}`}
-              />
-            </div>
-          </button>
+            Kontak
+          </Link>
+          <Link
+            href="/ibadah#kunjungan"
+            className={`inline-flex h-[38px] items-center justify-center rounded-full px-5 text-[13px] font-[600] transition-all duration-200 active:scale-[0.98] ${
+              isSolid
+                ? "bg-[#141414] text-white hover:bg-[#262626] shadow-xs"
+                : "bg-white text-[#141414] hover:bg-[#F3F4F6] shadow-md"
+            }`}
+          >
+            Rencanakan Kunjungan
+          </Link>
         </div>
+
+        {/* Mobile: Creative & Modern Hamburger Button (Mobile First) */}
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls="menu-seluler"
+          aria-label={open ? "Tutup Menu Navigasi" : "Buka Menu Navigasi"}
+          className={`group relative flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 md:hidden ${
+            isSolid
+              ? "border-[#EDEDED] bg-[#F2F2F2] text-[#141414] hover:bg-[#EDEDED]"
+              : "border-white/30 bg-black/20 text-white hover:bg-black/35 backdrop-blur-xs"
+          }`}
+        >
+          <div className="flex h-3.5 w-4 flex-col justify-between">
+            {/* Top Bar */}
+            <span
+              className={`h-[2px] rounded-full transition-all duration-300 ease-out origin-center ${
+                isSolid ? "bg-[#141414]" : "bg-white"
+              } ${open ? "translate-y-[6px] rotate-45 w-full !bg-[#141414]" : "w-full"}`}
+            />
+            {/* Middle Bar */}
+            <span
+              className={`h-[2px] rounded-full transition-all duration-200 ${
+                isSolid ? "bg-[#141414]" : "bg-white"
+              } ${open ? "opacity-0 scale-x-0" : "w-[70%] self-end"}`}
+            />
+            {/* Bottom Bar */}
+            <span
+              className={`h-[2px] rounded-full transition-all duration-300 ease-out origin-center ${
+                isSolid ? "bg-[#141414]" : "bg-white"
+              } ${open ? "-translate-y-[6px] -rotate-45 w-full !bg-[#141414]" : "w-full"}`}
+            />
+          </div>
+        </button>
       </div>
 
       {/* Mobile Drawer Menu — Full Viewport, Solid White, Never Cut Off */}
@@ -176,7 +174,7 @@ export default function Navbar() {
         <div
           id="menu-seluler"
           aria-label="Menu seluler"
-          className="fixed inset-x-0 top-[60px] h-[calc(100dvh-60px)] z-50 flex flex-col justify-between bg-white px-5 sm:px-6 py-6 md:hidden overflow-y-auto border-t border-[#EDEDED] shadow-2xl text-[#141414]"
+          className="fixed inset-x-0 top-[64px] h-[calc(100dvh-64px)] z-50 flex flex-col justify-between bg-white px-5 sm:px-6 py-6 md:hidden overflow-y-auto overscroll-contain border-t border-[#EDEDED] shadow-2xl text-[#141414]"
         >
           <div className="space-y-1.5">
             <div className="flex items-center justify-between px-3 py-1 mb-2">
@@ -220,14 +218,14 @@ export default function Navbar() {
             <Link
               href="/ibadah#kunjungan"
               onClick={() => setOpen(false)}
-              className="flex h-11 w-full items-center justify-center rounded-full bg-[#141414] text-[14px] font-[600] text-white transition active:scale-[0.98] shadow-sm"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-[#141414] text-[14px] font-[600] text-white transition active:scale-[0.98] shadow-sm"
             >
               Rencanakan Kunjungan
             </Link>
             <Link
               href="/kontak"
               onClick={() => setOpen(false)}
-              className="flex h-11 w-full items-center justify-center rounded-full border border-[#EDEDED] text-[14px] font-[500] text-[#141414] hover:bg-[#F2F2F2] transition"
+              className="flex h-12 w-full items-center justify-center rounded-full border border-[#EDEDED] text-[14px] font-[500] text-[#141414] hover:bg-[#F2F2F2] transition"
             >
               Hubungi Sekretariat
             </Link>

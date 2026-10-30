@@ -40,7 +40,7 @@ export function PageHero({
   badge?: string;
 }) {
   return (
-    <header className="border-b border-[#EDEDED] bg-[#FAFAFA] py-14 md:py-20">
+    <header className="border-b border-[#EDEDED] bg-[#FAFAFA] pt-28 pb-14 sm:pt-32 sm:pb-16 md:pt-36 md:pb-20">
       <div className="mx-auto max-w-[1280px] px-5 md:px-8">
         <span className="inline-block rounded-full bg-[#EDEDED] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
           {badge}
