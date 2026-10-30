@@ -2,12 +2,24 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { events } from "@/lib/data";
 
 export default function NewsEventsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+
+  // Toggle favorite/bookmark icon state
+  const toggleFavorite = (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFavorites((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   // Check scroll position to manage arrow states
   const updateScrollState = () => {
@@ -34,8 +46,8 @@ export default function NewsEventsSection() {
   const handleScroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      // Scroll by one card width (approx 360px on desktop or 85% clientWidth on mobile)
-      const scrollAmount = container.clientWidth > 768 ? 380 : container.clientWidth * 0.85;
+      // Scroll by one card width (approx 380px on desktop or 85% clientWidth on mobile)
+      const scrollAmount = container.clientWidth > 768 ? 390 : container.clientWidth * 0.85;
       container.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -60,7 +72,7 @@ export default function NewsEventsSection() {
             </p>
           </div>
 
-          {/* Desktop Arrow Controls (Semi-transparent by default, full opacity when cursor is near/hovered) */}
+          {/* Desktop Arrow Controls (Semi-transparent by default, full opacity on hover) */}
           <div className="hidden sm:flex items-center gap-2 self-end sm:self-auto">
             <button
               type="button"
@@ -97,7 +109,7 @@ export default function NewsEventsSection() {
         </div>
 
         {/* Horizontal Carousel Container:
-            - Mobile first: 1 card visible + peek (w-[85vw] max-w-[340px])
+            - Mobile first: 1 card visible + peek (w-[84vw] max-w-[340px])
             - Desktop: Maximum 3 cards visible horizontally across the 1280px viewport!
             - Scrollable via touch swipe, drag, mouse wheel / ctrl+scroll
         */}
@@ -106,63 +118,125 @@ export default function NewsEventsSection() {
           className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {events.map((item) => (
-            <div
-              key={item.id}
-              className="snap-start shrink-0 w-[84vw] sm:w-[360px] lg:w-[calc((100%-48px)/3)] flex flex-col justify-between rounded-[24px] border border-[#EDEDED] bg-white p-6 sm:p-7 shadow-[0_2px_14px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-[#141414] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
-            >
-              <div>
-                {/* Top Badge & Date Row */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="rounded-full bg-[#F2F2F2] px-3 py-1 text-[11px] font-[600] text-[#141414]">
-                    {item.tag}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-[12px] font-[600] text-[#707070]">
-                    <span className="inline-block h-2 w-2 rounded-full bg-blue-600" />
-                    <span>{item.day} {item.month} {item.year || "2026"}</span>
+          {events.map((item) => {
+            const isFav = favorites[item.id] || false;
+            return (
+              <div
+                key={item.id}
+                className="group snap-start shrink-0 w-[84vw] sm:w-[360px] lg:w-[calc((100%-48px)/3)] flex flex-col justify-between rounded-[22px] border border-[#EDEDED] bg-white p-3.5 sm:p-4 shadow-[0_2px_14px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-[#141414]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)]"
+              >
+                <div>
+                  {/* Top Image Banner with Floating Date Badge & Bookmark Icon */}
+                  <div className="relative h-[180px] sm:h-[195px] w-full overflow-hidden rounded-[16px] bg-[#F5F5F5]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 640px) 84vw, (max-width: 1024px) 360px, 400px"
+                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+
+                    {/* Floating Date Badge (Top-Left) */}
+                    <div className="absolute top-3 left-3 z-10 flex flex-col items-center justify-center min-w-[46px] rounded-xl bg-white/95 px-2.5 py-1.5 shadow-md backdrop-blur-xs border border-black/5">
+                      <span className="text-[18px] font-[800] leading-none text-[#141414]">
+                        {item.day}
+                      </span>
+                      <span className="text-[10px] font-[750] uppercase tracking-wider text-[#707070] mt-1 leading-none">
+                        {item.month}
+                      </span>
+                    </div>
+
+                    {/* Floating Heart/Bookmark Button (Top-Right) */}
+                    <button
+                      type="button"
+                      onClick={(e) => toggleFavorite(item.id, e)}
+                      aria-label={isFav ? "Hapus dari agenda tersimpan" : "Simpan agenda ini"}
+                      className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 shadow-md backdrop-blur-xs transition hover:scale-110 active:scale-95 border border-black/5 cursor-pointer"
+                    >
+                      <svg
+                        className={`h-4 w-4 transition-colors ${
+                          isFav ? "fill-red-500 text-red-500" : "fill-none text-[#707070] hover:text-red-500"
+                        }`}
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Card Content Area (Under Image) */}
+                  <div className="pt-4 px-1">
+                    {/* Jenis Acara (Event Category / Pill Badge) */}
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-[600] bg-[#EFF6FF] text-[#1D4ED8] tracking-wide mb-2.5">
+                      {item.tag}
+                    </span>
+
+                    {/* Nama Acara (Event Title) */}
+                    <h3 className="text-[17px] sm:text-[18px] font-[650] text-[#141414] leading-[1.3] line-clamp-2 min-h-[46px] group-hover:text-blue-600 transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Metadata Rows: Tempat & Waktu */}
+                    <div className="mt-3.5 space-y-2 border-t border-[#EDEDED] pt-3 text-[13px] text-[#707070]">
+                      {/* Tempat */}
+                      <p className="flex items-center gap-2">
+                        <svg
+                          className="h-4 w-4 shrink-0 text-[#9E9E9E]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <span className="truncate">{item.place}</span>
+                      </p>
+
+                      {/* Waktu */}
+                      <p className="flex items-center gap-2">
+                        <svg
+                          className="h-4 w-4 shrink-0 text-[#9E9E9E]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        <span className="truncate">{item.dateFull} · {item.time}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                {/* News/Event Title */}
-                <h3 className="text-[18px] sm:text-[19px] font-[650] text-[#141414] leading-[1.3] line-clamp-2">
-                  {item.title}
-                </h3>
-
-                {/* News Summary */}
-                <p className="mt-3 text-[14px] leading-[1.6] text-[#707070] line-clamp-3">
-                  {item.summary}
-                </p>
-
-                {/* Metadata Location & Time */}
-                <div className="mt-5 space-y-1.5 pt-4 border-t border-[#EDEDED] text-[12px] text-[#707070]">
-                  <p className="flex items-center gap-2">
-                    <span className="text-[#9E9E9E]">🕒</span>
-                    <span>{item.time}</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-[#9E9E9E]">📍</span>
-                    <span className="line-clamp-1">{item.place}</span>
-                  </p>
+                {/* Tombol View Details Versi Bahasa Indonesia ("Lihat Detail") */}
+                <div className="mt-5 px-1 pt-1">
+                  <Link
+                    href="/kegiatan"
+                    className="group/btn flex h-[42px] w-full items-center justify-center rounded-full bg-[#F2F2F2] hover:bg-[#141414] hover:text-white text-[#141414] text-[13px] font-[600] transition-all duration-200 active:scale-[0.98] shadow-2xs"
+                  >
+                    <span>Lihat Detail</span>
+                    <svg
+                      className="ml-1.5 h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
-
-              {/* Bottom Action Button */}
-              <div className="mt-6 pt-4 border-t border-[#EDEDED] flex items-center justify-between">
-                <span className="rounded-full border border-[#EDEDED] bg-[#FAFAFA] px-2.5 py-0.5 text-[11px] font-[500] text-[#707070]">
-                  {item.status}
-                </span>
-                <Link
-                  href="/kegiatan"
-                  className="inline-flex items-center gap-1 text-[13px] font-[600] text-[#141414] hover:underline"
-                >
-                  <span>Detail Acara</span>
-                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Mobile Swipe Indicator & Controls */}
@@ -203,4 +277,3 @@ export default function NewsEventsSection() {
     </section>
   );
 }
-

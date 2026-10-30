@@ -216,11 +216,13 @@ export type Event = {
   day: string;
   month: string;
   year?: string;
+  dateFull: string;
   title: string;
   summary: string;
   time: string;
   place: string;
   tag: string;
+  image: string;
   status: "Buka Pendaftaran" | "Segera Hadir" | "Terbuka untuk Umum" | "Kegiatan Rutin";
 };
 
@@ -230,11 +232,13 @@ export const events: Event[] = [
     day: "07",
     month: "Nov",
     year: "2026",
+    dateFull: "Sabtu, 07 November 2026",
     title: "Retret Pemuda & Remaja Wasuponda",
     summary: "Kegiatan retret pembinaan iman dan keakraban bagi pemuda dan remaja se-Wasuponda di alam terbuka.",
     time: "08:00 - 17:00 WITA",
     place: "Camp Bukit Kasih Wasuponda",
     tag: "Komisi Pemuda",
+    image: "/events/retret-pemuda.jpg",
     status: "Buka Pendaftaran",
   },
   {
@@ -242,11 +246,13 @@ export const events: Event[] = [
     day: "15",
     month: "Nov",
     year: "2026",
+    dateFull: "Minggu, 15 November 2026",
     title: "Bakti Sosial & Pemeriksaan Kesehatan Gratis",
     summary: "Pelayanan kesehatan gratis dan pembagian paket kasih bagi warga jemaat lansia dan masyarakat sekitar.",
     time: "09:30 WITA",
     place: "Pelataran Gedung POUK",
     tag: "Komisi Diakonia",
+    image: "/events/bakti-sosial.jpg",
     status: "Terbuka untuk Umum",
   },
   {
@@ -254,11 +260,13 @@ export const events: Event[] = [
     day: "29",
     month: "Nov",
     year: "2026",
+    dateFull: "Minggu, 29 November 2026",
     title: "Ibadah Pembukaan Masa Adven 2026",
     summary: "Ibadah khusus penyalaan lilin Adven pertama dan persiapan jemaat menyongsong peringatan Natal.",
     time: "10:00 WITA",
     place: "GEREJA POUK Wasuponda",
     tag: "Ibadah Khusus",
+    image: "/events/adven-2026.jpg",
     status: "Segera Hadir",
   },
   {
@@ -266,11 +274,13 @@ export const events: Event[] = [
     day: "25",
     month: "Des",
     year: "2026",
+    dateFull: "Jumat, 25 Desember 2026",
     title: "Ibadah Raya Natal Bersama Jemaat",
     summary: "Perayaan Natal kudus bersama seluruh jemaat keluarga besar POUK Wasuponda dalam sukacita keselamatan.",
     time: "10:00 WITA",
     place: "GEREJA POUK Wasuponda",
     tag: "Hari Raya",
+    image: "/events/natal-jemaat.jpg",
     status: "Segera Hadir",
   },
   {
@@ -278,11 +288,13 @@ export const events: Event[] = [
     day: "Jum",
     month: "Pkn",
     year: "2026",
+    dateFull: "Setiap Hari Jumat",
     title: "Latihan Paduan Suara & Musik Liturgi",
     summary: "Persiapan puji-pujian ibadah raya bersama tim pemusik, paduan suara, dan multimedia gereja.",
     time: "19:30 WITA",
     place: "Gedung Utama POUK",
     tag: "Musik & Liturgi",
+    image: "/events/paduan-suara.jpg",
     status: "Kegiatan Rutin",
   },
   {
@@ -290,11 +302,13 @@ export const events: Event[] = [
     day: "Jum",
     month: "Pkn",
     year: "2026",
+    dateFull: "Setiap Hari Jumat",
     title: "Persekutuan Doa Kaum Ibu (PW)",
     summary: "Persekutuan doa wanita jemaat, saling menopang dalam pergumulan keluarga dan perkunjungan kasih.",
     time: "16:30 WITA",
     place: "Ruang Serbaguna POUK",
     tag: "Persekutuan Wanita",
+    image: "/events/doa-ibu.jpg",
     status: "Kegiatan Rutin",
   },
 ];
