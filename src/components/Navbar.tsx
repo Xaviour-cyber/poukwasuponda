@@ -46,7 +46,7 @@ export default function Navbar() {
   const isSolid = !isHome || scrolled || open;
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 h-[64px]">
+    <header className="fixed top-0 inset-x-0 z-50 h-[68px] sm:h-[72px]">
       {/* 
         Smooth Background Overlay:
         Fades in seamlessly using GPU-accelerated opacity transition.
@@ -60,7 +60,7 @@ export default function Navbar() {
       />
 
       {/* Main Nav Bar */}
-      <div className="relative mx-auto flex h-[64px] max-w-[1280px] items-center justify-between px-4 sm:px-6 md:px-8">
+      <div className="relative mx-auto flex h-[68px] sm:h-[72px] max-w-[1280px] items-center justify-between px-4 sm:px-6 md:px-8">
         {/* Left: Official Brand Logo with seamless tone transition */}
         <Link
           href="/"
@@ -71,9 +71,9 @@ export default function Navbar() {
             <Image
               src="/logo-navbar.png"
               alt="Gereja POUK Jemaat Wasuponda"
-              width={185}
-              height={42}
-              className={`h-[34px] sm:h-[38px] w-auto object-contain transition-[filter] duration-300 ease-in-out ${
+              width={240}
+              height={56}
+              className={`h-[42px] sm:h-[48px] md:h-[50px] w-auto object-contain transition-[filter] duration-300 ease-in-out ${
                 isSolid ? "brightness-100" : "brightness-0 invert"
               }`}
               priority
@@ -133,37 +133,33 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile: Creative & Modern Hamburger Button (Mobile First) */}
+        {/* Mobile: Pure Modern Hamburger Button (No Circular Background) */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="menu-seluler"
           aria-label={open ? "Tutup Menu Navigasi" : "Buka Menu Navigasi"}
-          className={`group relative flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 md:hidden ${
-            isSolid
-              ? "border-[#EDEDED] bg-[#F2F2F2] text-[#141414] hover:bg-[#EDEDED]"
-              : "border-white/30 bg-black/20 text-white hover:bg-black/35 backdrop-blur-xs"
-          }`}
+          className="relative flex h-11 w-11 items-center justify-center p-2 text-inherit transition-opacity hover:opacity-80 active:scale-95 md:hidden cursor-pointer"
         >
-          <div className="flex h-3.5 w-4 flex-col justify-between">
+          <div className="flex h-4 w-5 flex-col justify-between">
             {/* Top Bar */}
             <span
               className={`h-[2px] rounded-full transition-all duration-300 ease-out origin-center ${
                 isSolid ? "bg-[#141414]" : "bg-white"
-              } ${open ? "translate-y-[6px] rotate-45 w-full !bg-[#141414]" : "w-full"}`}
+              } ${open ? "translate-y-[7px] rotate-45 w-full !bg-[#141414]" : "w-full"}`}
             />
             {/* Middle Bar */}
             <span
               className={`h-[2px] rounded-full transition-all duration-200 ${
                 isSolid ? "bg-[#141414]" : "bg-white"
-              } ${open ? "opacity-0 scale-x-0" : "w-[70%] self-end"}`}
+              } ${open ? "opacity-0 scale-x-0" : "w-[75%] self-end"}`}
             />
             {/* Bottom Bar */}
             <span
               className={`h-[2px] rounded-full transition-all duration-300 ease-out origin-center ${
                 isSolid ? "bg-[#141414]" : "bg-white"
-              } ${open ? "-translate-y-[6px] -rotate-45 w-full !bg-[#141414]" : "w-full"}`}
+              } ${open ? "-translate-y-[7px] -rotate-45 w-full !bg-[#141414]" : "w-full"}`}
             />
           </div>
         </button>
@@ -174,7 +170,7 @@ export default function Navbar() {
         <div
           id="menu-seluler"
           aria-label="Menu seluler"
-          className="fixed inset-x-0 top-[64px] h-[calc(100dvh-64px)] z-50 flex flex-col justify-between bg-white px-5 sm:px-6 py-6 md:hidden overflow-y-auto overscroll-contain border-t border-[#EDEDED] shadow-2xl text-[#141414]"
+          className="fixed inset-x-0 top-[68px] sm:top-[72px] h-[calc(100dvh-68px)] sm:h-[calc(100dvh-72px)] z-50 flex flex-col justify-between bg-white px-5 sm:px-6 py-6 md:hidden overflow-y-auto overscroll-contain border-t border-[#EDEDED] shadow-2xl text-[#141414]"
         >
           <div className="space-y-1.5">
             <div className="flex items-center justify-between px-3 py-1 mb-2">

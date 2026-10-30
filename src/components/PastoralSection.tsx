@@ -18,9 +18,11 @@ export default function PastoralSection() {
               Gereja yang Terbuka bagi Setiap Jiwa
             </h2>
 
-            <blockquote className="rounded-[22px] border-l-4 border-[#141414] bg-[#FAFAFA] p-6 sm:p-7 text-[16px] sm:text-[17px] leading-[1.7] text-[#141414] font-[450] italic">
-              "{pastoralWelcome.quote}"
-            </blockquote>
+            <div className="border-l-2 border-[#141414] pl-5 sm:pl-6 py-1">
+              <p className="text-[16px] sm:text-[17px] leading-[1.75] text-[#141414] font-[450]">
+                &ldquo;{pastoralWelcome.quote}&rdquo;
+              </p>
+            </div>
 
             <div className="flex items-center gap-3.5 pt-1">
               <div className="relative h-12 w-12 shrink-0 rounded-full bg-[#141414] p-2 flex items-center justify-center">

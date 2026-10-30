@@ -14,6 +14,7 @@ export const church = {
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(church.mapsQuery)}`;
 
 export const socialLinks = {
+  instagram: "https://www.instagram.com/gereja_poukwasuponda/",
   youtube: "https://www.youtube.com/@GerejaPOUKJemaatWasuponda",
   wa: `https://wa.me/${church.wa}?text=${encodeURIComponent("Shalom Sekretariat POUK Wasuponda, saya ingin bertanya seputar...")}`,
 };

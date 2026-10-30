@@ -167,7 +167,21 @@ export default function Footer() {
           </div>
 
           {/* Verified Official Channels */}
-          <div className="flex items-center gap-5 sm:gap-7">
+          <div className="flex flex-wrap items-center gap-5 sm:gap-7">
+            <a
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#707070] hover:text-[#141414] transition font-[500]"
+              aria-label="Instagram Resmi Gereja POUK Jemaat Wasuponda"
+            >
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              <span>Instagram @gereja_poukwasuponda</span>
+            </a>
             <a
               href={socialLinks.wa}
               target="_blank"
