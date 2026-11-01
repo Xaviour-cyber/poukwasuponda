@@ -105,7 +105,7 @@ export default function ScheduleSection() {
               href="/kontak"
               className="font-[600] text-[#141414] hover:underline"
             >
-              Rencanakan Kunjungan Pertama →
+              Rencanakan Kunjungan Pertama
             </Link>
           </div>
         </div>

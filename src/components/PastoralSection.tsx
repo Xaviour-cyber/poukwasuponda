@@ -83,6 +83,8 @@ export default function PastoralSection() {
             <div className="overflow-hidden rounded-[18px] border border-[#EDEDED] shadow-sm">
               <iframe
                 title="Peta Lokasi Gereja POUK Wasuponda"
+                width="100%"
+                height="320"
                 loading="lazy"
                 className="h-[320px] w-full"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(church.mapsQuery)}&output=embed`}

@@ -250,11 +250,11 @@ export default function NewsEventsSection() {
               onClick={() => handleScroll("left")}
               disabled={!canScrollLeft}
               aria-label="Geser ke kiri"
-              className={`flex h-8 w-8 items-center justify-center rounded-full border border-[#EDEDED] bg-white text-[#141414] ${
-                canScrollLeft ? "opacity-100" : "opacity-30"
+              className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#EDEDED] bg-white text-[#141414] shadow-xs active:scale-95 transition cursor-pointer ${
+                canScrollLeft ? "opacity-100" : "opacity-30 cursor-not-allowed"
               }`}
             >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
@@ -263,11 +263,11 @@ export default function NewsEventsSection() {
               onClick={() => handleScroll("right")}
               disabled={!canScrollRight}
               aria-label="Geser ke kanan"
-              className={`flex h-8 w-8 items-center justify-center rounded-full border border-[#EDEDED] bg-white text-[#141414] ${
-                canScrollRight ? "opacity-100" : "opacity-30"
+              className={`flex h-11 w-11 items-center justify-center rounded-full border border-[#EDEDED] bg-white text-[#141414] shadow-xs active:scale-95 transition cursor-pointer ${
+                canScrollRight ? "opacity-100" : "opacity-30 cursor-not-allowed"
               }`}
             >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </button>

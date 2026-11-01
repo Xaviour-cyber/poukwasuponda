@@ -1,12 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Bulletin } from "@/lib/data";
 
 export default function WartaView({ bulletins }: { bulletins: Bulletin[] }) {
   const [selectedMonth, setSelectedMonth] = useState<string>("Semua");
   const [search, setSearch] = useState<string>("");
   const [activeBulletin, setActiveBulletin] = useState<Bulletin | null>(null);
+
+  // R-32 Keyboard Accessibility: Close modal on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveBulletin(null);
+      }
+    };
+    if (activeBulletin) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeBulletin]);
 
   const months = ["Semua", "Oktober 2026"];
 
@@ -175,6 +190,9 @@ export default function WartaView({ bulletins }: { bulletins: Bulletin[] }) {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
           onClick={() => setActiveBulletin(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeBulletin.title}
         >
           <div
             className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-[24px] bg-white p-6 sm:p-8 shadow-2xl text-[#141414]"
