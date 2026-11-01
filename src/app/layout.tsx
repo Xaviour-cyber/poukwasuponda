@@ -12,16 +12,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { default: "POUK Wasuponda", template: "%s · POUK Wasuponda" },
-  description: "Jadwal ibadah, warta jemaat, renungan, dan kegiatan POUK Wasuponda.",
+  title: {
+    default: "Gereja POUK Wasuponda · Jadwal Ibadah, Warta & Renungan",
+    template: "%s · POUK Wasuponda",
+  },
+  description:
+    "Website resmi Gereja Persekutuan Oikumene Umat Kristen (POUK) Wasuponda, Luwu Timur. Informasi jadwal ibadah rutin, warta jemaat, renungan firman, persembahan, dan kegiatan pelayanan.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
   openGraph: {
-    title: "POUK Wasuponda",
-    description: "Ada tempat untuk Anda di POUK Wasuponda.",
+    title: "Gereja POUK Wasuponda · Rumah Keluarga Bertumbuh dalam Iman",
+    description:
+      "Gereja Persekutuan Oikumene Umat Kristen Wasuponda, Luwu Timur. Terbuka bagi seluruh jemaat dan keluarga.",
     locale: "id_ID",
     type: "website",
   },

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { EventRow, PageHero } from "@/components/blocks";
+import { PageHero } from "@/components/blocks";
+import KegiatanView from "@/components/KegiatanView";
 import { events } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -13,17 +14,9 @@ export default function Kegiatan() {
       <PageHero
         badge="Kalender Pelayanan"
         title="Kegiatan & Ibadah Khusus"
-        desc="Jadwal agenda persekutuan, retret pembinaan, bakti sosial, dan ibadah perayaan hari raya gerejawi mendatang."
+        desc="Jadwal agenda persekutuan pemuda, retret pembinaan, bakti sosial, dan ibadah perayaan hari raya gerejawi mendatang."
       />
-      <section className="mx-auto max-w-[1280px] px-5 md:px-8 py-16">
-        <div className="max-w-3xl mx-auto">
-          <ul className="space-y-4">
-            {events.map((e) => (
-              <EventRow key={e.id} e={e} />
-            ))}
-          </ul>
-        </div>
-      </section>
+      <KegiatanView events={events} />
     </>
   );
 }

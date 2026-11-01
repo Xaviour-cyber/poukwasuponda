@@ -10,11 +10,11 @@ export default function PastoralSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column (6 cols): Pastoral Welcome & Church Spirit */}
           <div className="lg:col-span-6 space-y-6">
-            <span className="inline-block rounded-full bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070]">
+            <span className="inline-flex items-center rounded-full bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070]">
               Sambutan Gembala & Majelis
             </span>
 
-            <h2 className="text-[30px] sm:text-[38px] font-[650] tracking-[-0.03em] text-[#141414] leading-[1.18]">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-[650] tracking-[-0.03em] text-[#141414] leading-[1.18]">
               Gereja yang Terbuka bagi Setiap Jiwa
             </h2>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Btn, PageHero } from "@/components/blocks";
 import ContactForm from "@/components/ContactForm";
 import { church, mapsUrl } from "@/lib/data";
@@ -22,10 +23,10 @@ export default function Kontak() {
           {/* Left Details */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <span className="inline-block rounded-full bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
+              <span className="inline-flex items-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
                 Informasi Kantor
               </span>
-              <h2 className="text-[26px] sm:text-[32px] font-[650] text-[#141414] tracking-[-0.02em]">
+              <h2 className="text-[28px] sm:text-[34px] font-[650] text-[#141414] tracking-[-0.02em]">
                 Alamat & Sekretariat
               </h2>
               <p className="mt-3 text-[15px] text-[#707070] leading-[1.6]">
@@ -58,6 +59,20 @@ export default function Kontak() {
                   Selasa – Sabtu: 09:00 – 16:00 WITA
                 </p>
               </div>
+            </div>
+
+            {/* Quick Box for Persembahan */}
+            <div className="rounded-[20px] border border-[#EDEDED] bg-white p-5 text-[13px] shadow-2xs">
+              <p className="font-[650] text-[#141414]">Pelayanan Persembahan & Kolekte</p>
+              <p className="text-[#707070] mt-1">
+                Untuk persembahan persepuluhan, syukur, maupun diakonia gereja, nomor rekening BRI dan QRIS resmi tersedia di halaman peribadahan.
+              </p>
+              <Link
+                href="/ibadah#persembahan"
+                className="mt-3 inline-flex items-center gap-1 font-[600] text-[#141414] hover:underline"
+              >
+                <span>Lihat Rekening Persembahan →</span>
+              </Link>
             </div>
 
             <div className="flex flex-wrap gap-3">

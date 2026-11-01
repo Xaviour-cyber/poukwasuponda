@@ -57,10 +57,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/ibadah"
+                    href="/ibadah#persembahan"
                     className="text-[#707070] transition-colors hover:text-[#141414]"
                   >
-                    Sekolah Minggu
+                    Persembahan & Kolekte
                   </Link>
                 </li>
                 <li>

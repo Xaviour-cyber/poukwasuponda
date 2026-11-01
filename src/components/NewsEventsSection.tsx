@@ -61,9 +61,9 @@ export default function NewsEventsSection() {
         {/* Section Header with Navigation Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div className="max-w-xl">
-            <p className="text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-2">
+            <span className="inline-flex items-center rounded-full bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
               Agenda & Kegiatan Gereja
-            </p>
+            </span>
             <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-[650] tracking-[-0.03em] text-[#141414] leading-[1.18]">
               Berita dan Acara
             </h2>

@@ -42,7 +42,7 @@ export function PageHero({
   return (
     <header className="border-b border-[#EDEDED] bg-[#FAFAFA] pt-28 pb-14 sm:pt-32 sm:pb-16 md:pt-36 md:pb-20">
       <div className="mx-auto max-w-[1280px] px-5 md:px-8">
-        <span className="inline-block rounded-full bg-[#EDEDED] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
+        <span className="inline-flex items-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
           {badge}
         </span>
         <h1 className="text-[34px] sm:text-[46px] lg:text-[52px] font-[650] tracking-[-0.03em] text-[#141414] leading-[1.12]">

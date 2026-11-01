@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { BulletinRow, PageHero } from "@/components/blocks";
+import { PageHero } from "@/components/blocks";
+import WartaView from "@/components/WartaView";
 import { bulletins } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -13,17 +14,9 @@ export default function Warta() {
       <PageHero
         badge="Warta Mingguan"
         title="Arsip Warta Jemaat"
-        desc="Informasi pelayanan, pembacaan firman, susunan pelayan ibadah, dan laporan berkala jemaat POUK Wasuponda."
+        desc="Informasi pelayanan, pembacaan firman mingguan, susunan pelayan ibadah, dan pokok doa jemaat POUK Wasuponda."
       />
-      <section className="mx-auto max-w-[1280px] px-5 md:px-8 py-16">
-        <div className="max-w-3xl mx-auto">
-          <ul className="space-y-4">
-            {bulletins.map((b) => (
-              <BulletinRow key={b.id} b={b} />
-            ))}
-          </ul>
-        </div>
-      </section>
+      <WartaView bulletins={bulletins} />
     </>
   );
 }

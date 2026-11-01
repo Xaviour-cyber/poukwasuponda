@@ -124,6 +124,9 @@ export type Bulletin = {
   theme: string;
   liturgy: string;
   size: string;
+  month: string;
+  readings: string;
+  preacher: string;
 };
 
 export const bulletins: Bulletin[] = [
@@ -131,37 +134,49 @@ export const bulletins: Bulletin[] = [
     id: "w-2026-10-25",
     date: "25 Oktober 2026",
     title: "Warta Jemaat Minggu Ke-4 Oktober",
-    href: "#",
+    href: "/warta/warta-jemaat-pouk.pdf",
     theme: "Bertekun dalam Doa dan Kasih Persaudaraan",
     liturgy: "Minggu Biasa",
     size: "1.4 MB",
+    month: "Oktober 2026",
+    readings: "Roma 12:9-21 & Mazmur 133",
+    preacher: "Pdt. Pelayan Jemaat",
   },
   {
     id: "w-2026-10-18",
     date: "18 Oktober 2026",
     title: "Warta Jemaat Minggu Ke-3 Oktober",
-    href: "#",
+    href: "/warta/warta-jemaat-pouk.pdf",
     theme: "Melayani dengan Kerendahan Hati",
     liturgy: "Minggu Pelayanan",
     size: "1.2 MB",
+    month: "Oktober 2026",
+    readings: "Filipi 2:1-11 & Markus 10:42-45",
+    preacher: "Majelis Jemaat POUK",
   },
   {
     id: "w-2026-10-11",
     date: "11 Oktober 2026",
     title: "Warta Jemaat Minggu Ke-2 Oktober",
-    href: "#",
+    href: "/warta/warta-jemaat-pouk.pdf",
     theme: "Keluarga yang Berakar di Dalam Kristus",
     liturgy: "Bulan Keluarga",
     size: "1.5 MB",
+    month: "Oktober 2026",
+    readings: "Yosua 24:14-18 & Efesus 5:21-33",
+    preacher: "Pdt. Pelayan Jemaat",
   },
   {
     id: "w-2026-10-04",
     date: "4 Oktober 2026",
     title: "Warta Jemaat Minggu Ke-1 Oktober",
-    href: "#",
+    href: "/warta/warta-jemaat-pouk.pdf",
     theme: "Perjamuan Kudus Sedunia",
     liturgy: "Perjamuan Kudus",
     size: "1.3 MB",
+    month: "Oktober 2026",
+    readings: "1 Korintus 11:23-26 & Yohanes 6:35",
+    preacher: "Pdt. Pelayan Jemaat",
   },
 ];
 
@@ -174,6 +189,8 @@ export type Devotional = {
   date: string;
   excerpt: string;
   readTime: string;
+  fullText: string[];
+  prayer: string;
 };
 
 export const devotionals: Devotional[] = [
@@ -187,6 +204,13 @@ export const devotionals: Devotional[] = [
     readTime: "3 mnt baca",
     excerpt:
       "Letih tidak membuat kita tersingkir dari rumah Tuhan. Justru di sanalah kita diundang untuk beristirahat dan dipulihkan.",
+    fullText: [
+      "Seringkali kita merasa bahwa untuk datang menghadap Tuhan, kita harus dalam keadaan sempurna, berhasil, dan memiliki hati yang kuat. Namun Yesus Kristus justru memberikan undangan yang berbanding terbalik: 'Marilah kepada-Ku, semua yang letih lesu dan berbeban berat, Aku akan memberi kelegaan kepadamu.'",
+      "Di hadapan Tuhan, kejujuran hati jauh lebih berharga daripada kepura-puraan. Tuhan tidak mencari orang yang berpura-pura kuat, melainkan hati yang berserah dan mengakui keterbatasannya. Saat kita meletakkan beban kekhawatiran hidup, pekerjaan, keluarga, dan pergumulan pribadi di kaki salib Kristus, damai sejahtera yang melampaui segala akal akan memenuhi batin kita.",
+      "Hari ini, apapun beban berat yang sedang Anda pikul di Wasuponda maupun di tanah perantauan, datanglah kepada-Nya. Pintu anugerah-Nya senantiasa terbuka lebar menyambut Anda.",
+    ],
+    prayer:
+      "Tuhan Yesus, terima kasih atas kasih-Mu yang tanpa syarat. Hari ini aku menyerahkan segala keletihan dan kekhawatiranku ke dalam tangan-Mu. Berikanlah aku damai sejahtera dan kelegaan dari-Mu. Amin.",
   },
   {
     id: "dev-2",
@@ -198,6 +222,13 @@ export const devotionals: Devotional[] = [
     readTime: "4 mnt baca",
     excerpt:
       "Kasih bukan sekadar getaran perasaan. Ia mewujud dalam sapaan ramah, kesabaran mendengarkan sesama, dan kemurahan hati.",
+    fullText: [
+      "Rasul Paulus menuliskan bahwa kasih itu sabar, murah hati, tidak memegahkan diri, dan tidak mencari keuntungan diri sendiri. Di tengah kesibukan sehari-hari, kasih sejati seringkali diuji bukan dalam hal-hal besar spektakuler, melainkan dalam interaksi kecil sehari-hari dengan sesama di sekitar kita.",
+      "Bagaimana kita merespons orang yang membuat kita kesal? Apakah kita menyediakan waktu untuk mendengarkan saudara jemaat yang sedang bersedih? Kasih Kristus memanggil kita untuk melangkah keluar dari zona nyaman dan menjadi berkat nyata bagi sesama di lingkungan keluarga, gereja, dan masyarakat Wasuponda.",
+      "Marilah kita menjadi cermin kasih Kristus hari ini melalui perkataan yang menguatkan, senyum yang tulus, dan tangan yang siap menolong.",
+    ],
+    prayer:
+      "Bapa di surga, penuhilah hatiku dengan kasih-Mu agar aku dapat menjadi saluran berkat bagi orang-orang di sekitarku hari ini. Mampukanlah aku mengasihi dengan tulus tanpa mengharapkan balasan. Amin.",
   },
   {
     id: "dev-3",
@@ -209,6 +240,13 @@ export const devotionals: Devotional[] = [
     readTime: "3 mnt baca",
     excerpt:
       "Di lembah yang paling curam dan tak menentu sekalipun, tangan-Nya menuntun langkah kita ke padang rumput yang tenang.",
+    fullText: [
+      "Daud memulai mazmurnya yang legendaris dengan keyakinan yang teguh: 'TUHAN adalah gembalaku, takkan kekurangan aku.' Seorang gembala yang baik tidak hanya berjalan di depan domba-dombanya, tetapi ia juga mengenal setiap domba secara pribadi, tahu kelemahan mereka, dan melindungi mereka dari bahaya.",
+      "Ketika kita menghadapi ketidakpastian masa depan, pergumulan karier, ataupun masa-masa sulit, ingatlah bahwa kita tidak sedang berjalan sendirian. Gembala Agung kita selalu menyertai, memelihara, dan menyediakan apa yang benar-benar kita perlukan pada waktu-Nya yang terbaik.",
+      "Bersandarlah penuh pada pimpinan-Nya, sebab Ia adalah Gembala yang setia dan tidak pernah meninggalkan umat-Nya.",
+    ],
+    prayer:
+      "Tuhan, Engkau adalah Gembalaku yang baik. Pimpinlah setiap langkah hidupku, dan tolong aku agar selalu percaya pada rancangan damai sejahtera-Mu. Amin.",
   },
 ];
 
@@ -223,6 +261,7 @@ export type Event = {
   time: string;
   place: string;
   tag: string;
+  category: "pemuda" | "diakonia" | "khusus" | "rutin";
   image: string;
   status: "Buka Pendaftaran" | "Segera Hadir" | "Terbuka untuk Umum" | "Kegiatan Rutin";
 };
@@ -239,6 +278,7 @@ export const events: Event[] = [
     time: "08:00 - 17:00 WITA",
     place: "Camp Bukit Kasih Wasuponda",
     tag: "Komisi Pemuda",
+    category: "pemuda",
     image: "/events/retret-pemuda.jpg",
     status: "Buka Pendaftaran",
   },
@@ -253,6 +293,7 @@ export const events: Event[] = [
     time: "09:30 WITA",
     place: "Pelataran Gedung POUK",
     tag: "Komisi Diakonia",
+    category: "diakonia",
     image: "/events/bakti-sosial.jpg",
     status: "Terbuka untuk Umum",
   },
@@ -267,6 +308,7 @@ export const events: Event[] = [
     time: "10:00 WITA",
     place: "GEREJA POUK Wasuponda",
     tag: "Ibadah Khusus",
+    category: "khusus",
     image: "/events/adven-2026.jpg",
     status: "Segera Hadir",
   },
@@ -281,6 +323,7 @@ export const events: Event[] = [
     time: "10:00 WITA",
     place: "GEREJA POUK Wasuponda",
     tag: "Hari Raya",
+    category: "khusus",
     image: "/events/natal-jemaat.jpg",
     status: "Segera Hadir",
   },
@@ -295,6 +338,7 @@ export const events: Event[] = [
     time: "19:30 WITA",
     place: "Gedung Utama POUK",
     tag: "Musik & Liturgi",
+    category: "rutin",
     image: "/events/paduan-suara.jpg",
     status: "Kegiatan Rutin",
   },
@@ -309,10 +353,36 @@ export const events: Event[] = [
     time: "16:30 WITA",
     place: "Ruang Serbaguna POUK",
     tag: "Persekutuan Wanita",
+    category: "rutin",
     image: "/events/doa-ibu.jpg",
     status: "Kegiatan Rutin",
   },
 ];
+
+export const givingInfo = {
+  bankName: "Bank Rakyat Indonesia (BRI)",
+  bankCode: "002",
+  accountNumber: "0234-01-002345-50-8",
+  accountHolder: "GEREJA POUK WASUPONDA",
+  qrisName: "POUK JEMAAT WASUPONDA",
+  verse:
+    "Hendaklah masing-masing memberikan menurut kerelaan hatinya, jangan dengan sedih hati atau karena paksaan, sebab Allah mengasihi orang yang memberi dengan sukacita.",
+  verseRef: "2 Korintus 9:7",
+  channels: [
+    {
+      title: "Persembahan Persepuluhan & Syukur",
+      desc: "Menopang seluruh pelayanan ibadah, operasional gedung gereja, dan pembinaan iman jemaat.",
+    },
+    {
+      title: "Diakonia & Aksi Kasih",
+      desc: "Bantuan bagi jemaat sakit, lansia, yatim piatu, dan saudara yang membutuhkan di Wasuponda.",
+    },
+    {
+      title: "Pembangunan & Sarana Ibadah",
+      desc: "Pemeliharaan gedung gereja, peremajaan sound system, multimedia, dan fasilitas sekolah minggu.",
+    },
+  ],
+};
 
 export type Ministry = {
   id: string;
@@ -392,7 +462,7 @@ export const faq = [
   },
   {
     q: "Apakah ada kelas untuk anak-anak selama ibadah?",
-    a: "Ya! Sekolah Minggu diadakan bersamaan dengan Ibadah Raya jam 09:00 WITA di ruang serbaguna.",
+    a: "Ya! Ibadah Sekolah Minggu anak diadakan setiap hari Minggu pukul 08:00 WITA di ruang serbaguna, sebelum Ibadah Raya dimulai pukul 10:00 WITA.",
   },
   {
     q: "Apakah saya harus jemaat terdaftar untuk hadir beribadah?",

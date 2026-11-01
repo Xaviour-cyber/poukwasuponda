@@ -9,9 +9,9 @@ export default function ScheduleSection() {
       <div className="mx-auto max-w-[1280px] px-5 sm:px-6 md:px-8">
         {/* Section Header */}
         <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-12">
-          <p className="text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-2">
+          <span className="inline-flex items-center rounded-full bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
             Peribadahan Jemaat
-          </p>
+          </span>
           <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-[650] tracking-[-0.03em] text-[#141414] leading-[1.18]">
             Jadwal Ibadah Rutin
           </h2>
