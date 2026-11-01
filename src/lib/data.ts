@@ -43,16 +43,6 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    id: "sekolah-minggu",
-    name: "Ibadah Sekolah Minggu",
-    day: 0,
-    time: "08:00",
-    place: "Gedung Serbaguna POUK",
-    note: "Pendidikan rohani dan pembinaan iman bagi anak-anak dan balita.",
-    badge: "Sekolah Minggu",
-    target: "Anak-Anak & Balita",
-  },
-  {
     id: "ibadah-minggu",
     name: "Ibadah Hari Minggu",
     day: 0,
@@ -81,6 +71,16 @@ export const services: Service[] = [
     note: "Persekutuan remaja untuk saling menguatkan dalam iman dan karakter kristiani.",
     badge: "Remaja",
     target: "Remaja",
+  },
+  {
+    id: "sekolah-minggu",
+    name: "Ibadah Sekolah Minggu",
+    day: 0,
+    time: "08:00",
+    place: "Gedung Serbaguna POUK",
+    note: "Pendidikan rohani dan pembinaan iman bagi anak-anak dan balita.",
+    badge: "Sekolah Minggu",
+    target: "Anak-Anak & Balita",
   },
 ];
 

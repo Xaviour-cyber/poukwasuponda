@@ -73,8 +73,17 @@ export default function ScheduleSection() {
                   <p className="text-[13px] text-[#707070] mt-0.5 leading-[1.5]">
                     {item.note}
                   </p>
-                  <p className="text-[12px] font-[500] text-[#141414]/70 mt-1 flex items-center gap-1">
-                    <span>📍</span>
+                  <p className="text-[12px] font-[500] text-[#707070] mt-1.5 flex items-center gap-1.5">
+                    <svg
+                      className="h-3.5 w-3.5 shrink-0 text-[#9E9E9E]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
                     <span>{item.place}</span>
                   </p>
                 </div>
@@ -93,10 +102,10 @@ export default function ScheduleSection() {
           <div className="mt-5 pt-4 border-t border-[#EDEDED] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[12px] sm:text-[13px] text-[#707070]">
             <p>Ibadah terbuka bagi seluruh keluarga jemaat, perantau, dan setiap tamu jemaat.</p>
             <Link
-              href="/ibadah#kunjungan"
+              href="/kontak"
               className="font-[600] text-[#141414] hover:underline"
             >
-              Panduan Kunjungan Pertama →
+              Rencanakan Kunjungan Pertama →
             </Link>
           </div>
         </div>

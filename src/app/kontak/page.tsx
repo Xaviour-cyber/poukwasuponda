@@ -61,20 +61,6 @@ export default function Kontak() {
               </div>
             </div>
 
-            {/* Quick Box for Persembahan */}
-            <div className="rounded-[20px] border border-[#EDEDED] bg-white p-5 text-[13px] shadow-2xs">
-              <p className="font-[650] text-[#141414]">Pelayanan Persembahan & Kolekte</p>
-              <p className="text-[#707070] mt-1">
-                Untuk persembahan persepuluhan, syukur, maupun diakonia gereja, nomor rekening BRI dan QRIS resmi tersedia di halaman peribadahan.
-              </p>
-              <Link
-                href="/ibadah#persembahan"
-                className="mt-3 inline-flex items-center gap-1 font-[600] text-[#141414] hover:underline"
-              >
-                <span>Lihat Rekening Persembahan →</span>
-              </Link>
-            </div>
-
             <div className="flex flex-wrap gap-3">
               <Btn href={`https://wa.me/${church.wa}`} tone="solid">
                 Chat WhatsApp Pengurus

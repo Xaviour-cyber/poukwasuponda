@@ -49,18 +49,18 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/ibadah#kunjungan"
+                    href="/kontak"
                     className="text-[#707070] transition-colors hover:text-[#141414]"
                   >
-                    Kunjungan Pertama
+                    Rencanakan Kunjungan
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/ibadah#persembahan"
+                    href="/ibadah"
                     className="text-[#707070] transition-colors hover:text-[#141414]"
                   >
-                    Persembahan & Kolekte
+                    Ibadah Pemuda & Remaja
                   </Link>
                 </li>
                 <li>

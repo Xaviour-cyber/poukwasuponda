@@ -30,7 +30,7 @@ export default function HeroSection() {
         {/* Dual Primary Actions */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           <Link
-            href="/ibadah#kunjungan"
+            href="/kontak"
             className="inline-flex h-[46px] sm:h-[48px] items-center justify-center rounded-full bg-white px-7 text-[14px] sm:text-[15px] font-[600] text-[#141414] transition-all hover:bg-[#F3F4F6] active:scale-[0.98] shadow-lg"
           >
             Rencanakan Kunjungan

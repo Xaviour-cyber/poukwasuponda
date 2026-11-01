@@ -1,57 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Btn, PageHero } from "@/components/blocks";
-import GivingSection from "@/components/GivingSection";
-import { church, dayNames, faq, mapsUrl, services } from "@/lib/data";
+import { PageHero } from "@/components/blocks";
+import { dayNames, mapsUrl, services } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Jadwal Ibadah & Persembahan",
-  description: "Jadwal ibadah raya, sekolah minggu, persekutuan doa, persembahan, dan panduan kunjungan di POUK Wasuponda.",
+  title: "Jadwal Ibadah",
+  description: "Jadwal ibadah raya, persekutuan pemuda, remaja, dan sekolah minggu di POUK Wasuponda.",
 };
 
 export default function Ibadah() {
-  const list = [...services].sort((a, b) => a.day - b.day || a.time.localeCompare(b.time));
+  // Services are ordered: Minggu 10:00 -> Pemuda -> Remaja -> Sekolah Minggu (paling bawah)
+  const list = services;
 
   return (
     <>
       <PageHero
-        badge="Jadwal & Kunjungan"
+        badge="Jadwal Peribadahan"
         title="Jadwal Ibadah Jemaat"
-        desc="Semua ibadah terbuka bagi seluruh keluarga jemaat, perantau, dan setiap tamu jemaat. Waktu pelaksanaan mengacu pada Waktu Indonesia Tengah (WITA)."
+        desc="Waktu pelaksanaan ibadah rutin mingguan jemaat POUK Wasuponda dalam Zona Waktu Indonesia Tengah (WITA). Seluruh ibadah terbuka bagi jemaat dan keluarga."
       />
 
-      {/* Quick Anchor Jump Bar */}
-      <section className="border-b border-[#EDEDED] bg-white">
-        <div className="mx-auto max-w-[1280px] px-5 sm:px-6 md:px-8 py-3.5 flex items-center gap-2 overflow-x-auto no-scrollbar text-[13px] font-[600]">
-          <a
-            href="#jadwal"
-            className="rounded-full bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 py-1.5 text-[#141414] transition whitespace-nowrap"
-          >
-            Jadwal Ibadah
-          </a>
-          <a
-            href="#persembahan"
-            className="rounded-full bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 py-1.5 text-[#141414] transition whitespace-nowrap"
-          >
-            Persembahan & Kolekte
-          </a>
-          <a
-            href="#lokasi"
-            className="rounded-full bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 py-1.5 text-[#141414] transition whitespace-nowrap"
-          >
-            Lokasi Gedung Gereja
-          </a>
-          <a
-            href="#kunjungan"
-            className="rounded-full bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 py-1.5 text-[#141414] transition whitespace-nowrap"
-          >
-            Panduan Pengunjung
-          </a>
-        </div>
-      </section>
-
-      {/* Service Schedule List */}
-      <section id="jadwal" className="scroll-mt-24 mx-auto max-w-[1280px] px-5 sm:px-6 md:px-8 py-16">
+      {/* Service Schedule List Only */}
+      <section className="mx-auto max-w-[1280px] px-5 sm:px-6 md:px-8 py-16">
         <div className="max-w-4xl mx-auto space-y-4">
           {list.map((s) => (
             <div
@@ -80,8 +49,18 @@ export default function Ibadah() {
                   {s.note}
                 </p>
                 <div className="mt-2.5 flex flex-wrap items-center gap-3 text-[12px] text-[#707070]">
-                  <span className="flex items-center gap-1 font-[500]">
-                    <span>📍</span>
+                  {/* Location with SVG Pin Icon matching Berita & Acara */}
+                  <span className="flex items-center gap-1.5 font-[500]">
+                    <svg
+                      className="h-3.5 w-3.5 shrink-0 text-[#9E9E9E]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
                     <span>{s.place}</span>
                   </span>
                   <span>·</span>
@@ -91,87 +70,18 @@ export default function Ibadah() {
                 </div>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: Maps Direction */}
               <div className="shrink-0 self-start sm:self-center">
                 <a
-                  href="#lokasi"
-                  className="inline-flex h-[38px] items-center justify-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 text-[13px] font-[600] text-[#141414] transition-all active:scale-95"
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-[38px] items-center gap-1.5 justify-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] hover:bg-[#141414] hover:text-white px-4 text-[13px] font-[600] text-[#141414] transition-all active:scale-95"
                 >
-                  Lihat Lokasi ↓
+                  <span>Petunjuk Arah ↗</span>
                 </a>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Persembahan & Kolekte Jemaat (Paket 3) */}
-      <GivingSection />
-
-      {/* Location & Map Section */}
-      <section id="lokasi" className="scroll-mt-24 border-t border-[#EDEDED] bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-[1280px] gap-8 px-5 sm:px-6 md:px-8 md:grid-cols-2 items-center">
-          <div>
-            <span className="inline-flex items-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
-              Petunjuk Arah
-            </span>
-            <h2 className="text-[28px] sm:text-[36px] font-[650] text-[#141414] tracking-[-0.02em]">
-              Lokasi Gedung Gereja
-            </h2>
-            <p className="mt-3 text-[16px] text-[#707070] leading-[1.6]">
-              {church.address}. Terletak strategis di pusat kecamatan Wasuponda,
-              mudah dijangkau dengan kendaraan roda dua maupun roda empat.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Btn href={mapsUrl} tone="solid">
-                Buka di Google Maps ↗
-              </Btn>
-              <Btn href="/kontak" tone="ghost">
-                Hubungi Pengurus
-              </Btn>
-            </div>
-          </div>
-          <div className="overflow-hidden rounded-[24px] border border-[#EDEDED] shadow-sm">
-            <iframe
-              title="Peta lokasi gereja POUK Wasuponda"
-              loading="lazy"
-              className="h-80 w-full"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(church.mapsQuery)}&output=embed`}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* First Time Visitor FAQ (Kunjungan Pertama) */}
-      <section id="kunjungan" className="mx-auto max-w-3xl scroll-mt-24 px-5 py-20">
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center rounded-full border border-[#EDEDED] bg-[#F2F2F2] px-3.5 py-1 text-[12px] font-[600] uppercase tracking-wider text-[#707070] mb-3">
-            Panduan Pengunjung
-          </span>
-          <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-[650] text-[#141414] tracking-[-0.02em]">
-            Kunjungan Pertama ke POUK
-          </h2>
-          <p className="mt-2 text-[15px] text-[#707070]">
-            Pertanyaan yang sering diajukan jemaat baru dan pengunjung luar kota.
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          {faq.map((f, i) => (
-            <details
-              key={i}
-              className="group rounded-[20px] border border-[#EDEDED] bg-white px-6 transition hover:border-[#141414]"
-            >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 py-4 text-[16px] font-[600] text-[#141414] list-none">
-                <span>{f.q}</span>
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F2F2F2] text-[16px] text-[#141414] transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="pb-5 pt-1 text-[14px] leading-[1.6] text-[#707070]">
-                {f.a}
-              </p>
-            </details>
           ))}
         </div>
       </section>

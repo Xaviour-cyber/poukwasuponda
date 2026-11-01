@@ -11,17 +11,20 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const isHome = pathname === "/";
+  const isHome = !pathname || pathname === "/" || pathname === "";
 
-  // Monitor scroll: threshold of 20px
+  // Monitor scroll: transparent when at top on homepage, solid white when scrolled down
   useEffect(() => {
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -41,9 +44,9 @@ export default function Navbar() {
   }, [open]);
 
   // Background and appearance state:
-  // Solid white when scrolled, on inner pages, or when mobile drawer is open.
-  // 100% transparent (no lines, no gradients) when at top of homepage.
-  const isSolid = !isHome || scrolled || open;
+  // Solid white when on inner pages, when scrolled down, or when mobile drawer is open.
+  // Immediately transparent when on homepage at top (even before initial scroll).
+  const isSolid = Boolean((pathname && pathname !== "/" && pathname !== "") || scrolled || open);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 h-[68px] sm:h-[72px]">
@@ -122,7 +125,7 @@ export default function Navbar() {
             Kontak
           </Link>
           <Link
-            href="/ibadah#kunjungan"
+            href="/kontak"
             className={`inline-flex h-[38px] items-center justify-center rounded-full px-5 text-[13px] font-[600] transition-all duration-200 active:scale-[0.98] ${
               isSolid
                 ? "bg-[#141414] text-white hover:bg-[#262626] shadow-xs"
@@ -212,7 +215,7 @@ export default function Navbar() {
 
           <div className="mt-8 space-y-3 pt-6 border-t border-[#EDEDED]">
             <Link
-              href="/ibadah#kunjungan"
+              href="/kontak"
               onClick={() => setOpen(false)}
               className="flex h-12 w-full items-center justify-center rounded-full bg-[#141414] text-[14px] font-[600] text-white transition active:scale-[0.98] shadow-sm"
             >
